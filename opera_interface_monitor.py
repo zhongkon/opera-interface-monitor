@@ -1,5 +1,6 @@
 import cx_Oracle
 import requests
+import sys
 
 def send_line(msg,token):
     url = 'https://notify-api.line.me/api/notify'
@@ -15,8 +16,8 @@ try:
 except cx_Oracle.DatabaseError as e:
     errorObj, = e.args
     send_line(errorObj.message,'youre token hear')
-
-
+    sys.exit()
+    
 try:
     #cur = con.cursor()
     cur.execute('SELECT OPERA.IFC_CTRL.NAME,OPERA.IFC_CTRL.ACTIVE,OPERA.IFC_CTRL.IFC_STATUS FROM OPERA.IFC_CTRL WHERE OPERA.IFC_CTRL.ACTIVE = 1')
